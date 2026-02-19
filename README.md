@@ -11,9 +11,9 @@ Jis skirtas tik tam, kad visi turėtų vienodai paruoštus objektus analizėms.
 
 ## Duomenys (`data/`) ir GitHub
 Šiuo metu **duomenys jau yra įkelti į GitHub (netyčia xd)**:
--HFCS-Quarterly-20250930--CSV_PRODUCT-BASED.csv
--dat.rds
--tm.rds
+- HFCS-Quarterly-20250930--CSV_PRODUCT-BASED.csv
+- dat.rds
+- tm.rds
 
 
 **jei nereikės pačių duomenų repozitorijoje**, tada duomenis laikysime tik lokaliai tai įkelsimė duomenys į .gitignore, ar tiesiog pratrinsim. 
