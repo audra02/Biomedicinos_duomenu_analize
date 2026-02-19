@@ -9,7 +9,7 @@
 Task_01.R yra **duomenų paruošimo skriptas**, paremtas dėstytojo duotu kodu.  
 Jis skirtas tik tam, kad visi turėtų vienodai paruoštus objektus analizėms.
 
-## Duomenys (`data/`) ir GitHub
+## Duomenys (data/) ir GitHub
 Šiuo metu **duomenys jau yra įkelti į GitHub (netyčia xd)**:
 - HFCS-Quarterly-20250930--CSV_PRODUCT-BASED.csv
 - dat.rds
