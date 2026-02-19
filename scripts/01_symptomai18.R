@@ -7,7 +7,7 @@ ls()
 names(dat)
 
 head(d18$code, 20)
-length(unique(d18$code)
+length(unique(d18$code))
 
        
 # 2) atrenkam nepilnamečius (tas pats indeksas taikomas ir dat, ir tm eilutėms)
