@@ -6,7 +6,7 @@
 ## Failų logika
 
 ## scripts/Task_01.R – duomenų paruošimas (dėstytojo šablonas)
-`Task_01.R` yra **duomenų paruošimo skriptas**, paremtas dėstytojo duotu kodu.  
+Task_01.R yra **duomenų paruošimo skriptas**, paremtas dėstytojo duotu kodu.  
 Jis skirtas tik tam, kad visi turėtų vienodai paruoštus objektus analizėms.
 
 ## Duomenys (`data/`) ir GitHub
