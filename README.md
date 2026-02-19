@@ -15,6 +15,7 @@ Jis skirtas tik tam, kad visi turėtų vienodai paruoštus objektus analizėms.
 - `data/dat.rds`
 - `data/tm.rds`
 
+
 **jei nereikės pačių duomenų repozitorijoje**, tada duomenis laikysime tik lokaliai tai įkelsimė duomenys į .gitignore, ar tiesiog pratrinsim. 
 ```gitignore
 data/*.csv
