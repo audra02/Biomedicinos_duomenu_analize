@@ -1,6 +1,6 @@
 # scripts/01_symptomai18.R
 
-library(ggplot2)
+
 
 names(d18)
 ls()
@@ -10,7 +10,7 @@ head(d18$code, 20)
 length(unique(d18$code))
 
        
-# 2) atrenkam nepilnamečius (tas pats indeksas taikomas ir dat, ir tm eilutėms)
+# 2 atrenkam nepilnamečius 
 idx <- dat$age < 18
        
 cat("Nepilnamečių įrašų skaičius:", sum(idx), "\n")
@@ -18,16 +18,15 @@ cat("Nepilnamečių įrašų skaičius:", sum(idx), "\n")
 # 3) paimam tik nepilnamečių term matrix dalį
 tm18 <- tm[idx, , drop = FALSE]
        
-# 4) kiek kartų pasitaiko kiekvienas simptomas (stulpelių sumos)
+# 4) kiek kartų pasitaiko kiekvienas simptomas 
  freq <- colSums(tm18)
        
 # 5) surikiuojam mažėjančiai ir paimam TOP
     freq <- sort(freq, decreasing = TRUE)
        
-cat("\nTOP 10 simptomų:\n")
 print(head(freq, 10))
        
-# 6) lentelė su procentais (TOP 15)
+# 6) lentelė su procentais ( 15)
 topN <- 15
 top <- head(freq, topN)
        
@@ -37,7 +36,7 @@ top <- head(freq, topN)
          procentai = round(100 * as.integer(top) / sum(idx), 2)
        )
        
-cat("\nTOP 15 simptomų (su procentais nuo visų nepilnamečių įrašų):\n")
+cat("\nTOP 15 simptomų \n")
 print(rez_symptomai18)     
 
 ## grafikai 
@@ -78,5 +77,119 @@ ggplot(df, aes(x = simptomas, y = kiekis)) +
     x = NULL,
     y = "Įrašų skaičius"
   ) +
-  theme_minimal() +
-  expand_limits(y = max(df$kiekis) * 1.12)
+  theme_minimal() 
+  expand_limits(y = max(df$kiekis) * 1.12).      
+
+
+
+
+
+
+
+
+#Grupiu palyginimas
+# Nepilnamečiai berniukai vs mergaitės
+# Ar skiriasi TOP 10 simptomų dažniai
+
+idx <- dat$age < 18
+d18 <- dat[idx, , drop = FALSE]
+tm18 <- tm[idx, , drop = FALSE]
+
+# tik male ir female
+keep_sex <- d18$sex %in% c("male", "female")
+d18_sex <- d18[keep_sex, , drop = FALSE]
+tm18_sex <- tm18[keep_sex, , drop = FALSE]
+
+nrow(d18_sex)
+print(table(d18_sex$sex))
+
+
+
+
+# TOP 10 simptomų tarp nepilnamečių (male+female)
+
+freq_sex <- sort(colSums(tm18_sex), decreasing = TRUE)
+
+topN_test <- 10
+top_symptoms_test <- names(head(freq_sex, topN_test))
+
+print(top_symptoms_test)
+
+
+# Rezultatų lentel
+rez_sex_symptoms <- data.frame(
+  simptomas = character(),
+  male_kiekis = integer(),
+  male_proc = numeric(),
+  female_kiekis = integer(),
+  female_proc = numeric(),
+  p_value = numeric(),
+  reiksminga_05 = character(),
+  stringsAsFactors = FALSE
+)
+
+
+n_male <- sum(d18_sex$sex == "male")
+n_female <- sum(d18_sex$sex == "female")
+
+# Ciklas per simptomus
+
+for (s in top_symptoms_test) {
+  
+  # ar simptomas yra (TRUE/FALSE)
+  x <- tm18_sex[, s] > 0
+  
+  # 2x2 lentelė: lytis x simptomas (yra/nera)
+  tab <- table(d18_sex$sex, x)
+  
+  
+  cat("Simptomas:", s, "\n")
+  print(tab)
+  
+  
+  # kiek turi simptomą
+  male_yes <- sum(x[d18_sex$sex == "male"])
+  female_yes <- sum(x[d18_sex$sex == "female"])
+  
+  # procentai grupėse
+  male_proc <- 100 * male_yes / n_male
+  female_proc <- 100 * female_yes / n_female
+  
+  # chi-square expected reikšmės 
+  chi_tmp <- suppressWarnings(chisq.test(tab))
+  exp_counts <- chi_tmp$expected
+  cat("Expected reikšmės (chi-square):\n")
+  print(round(exp_counts, 2))
+  
+  # Kadangi expected didelės -> naudojam chi-square testą
+  tst <- chisq.test(tab)
+  
+  reiksminga <- ifelse(tst$p.value < 0.05, "taip", "ne")
+  
+  # įrašom rezultatą į lentelę
+  rez_sex_symptoms <- rbind(
+    rez_sex_symptoms,
+    data.frame(
+      simptomas = s,
+      male_kiekis = as.integer(male_yes),
+      male_proc = round(male_proc, 2),
+      female_kiekis = as.integer(female_yes),
+      female_proc = round(female_proc, 2),
+      p_value = round(tst$p.value, 6),
+      reiksminga_05 = reiksminga,
+      stringsAsFactors = FALSE
+    )
+  )
+}
+
+
+# Surikiuojam pagal p reikšmę ir atspausdinam
+
+if (nrow(rez_sex_symptoms) > 0) {
+  rez_sex_symptoms <- rez_sex_symptoms[order(rez_sex_symptoms$p_value), ]
+}
+
+cat("Rezultatai: TOP 10 simptomų palyginimas (chi-square)\n")
+cat("Statistiškai reikšminga, jei p < 0.05\n")
+print(rez_sex_symptoms)
+
