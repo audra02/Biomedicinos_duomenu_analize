@@ -78,7 +78,7 @@ ggplot(df, aes(x = simptomas, y = kiekis)) +
     y = "Įrašų skaičius"
   ) +
   theme_minimal() 
-  expand_limits(y = max(df$kiekis) * 1.12).      
+  expand_limits(y = max(df$kiekis) * 1.12)      
 
 
 
@@ -183,7 +183,7 @@ for (s in top_symptoms_test) {
 }
 
 
-# Surikiuojam pagal p reikšmę ir atspausdinam
+# Surikiuojam pagal p reikšme
 
 if (nrow(rez_sex_symptoms) > 0) {
   rez_sex_symptoms <- rez_sex_symptoms[order(rez_sex_symptoms$p_value), ]
