@@ -32,7 +32,7 @@ product_risk <- minor %>%
 head(product_risk, 5)
 
 library(ggplot2)
-
+top5 <- head(product_risk, 5)
 grafikas <- ggplot(top5, aes(x = reorder(product, total_severity),
                  y = total_severity)) +
   geom_col() +
@@ -50,7 +50,7 @@ grafikas <- ggplot(top5, aes(x = reorder(product, total_severity),
   ) +
   theme_minimal()
 
-ggsave("top5_pavojingiausi.png",
+ggsave("plots/top5_pavojingiausi.png",
        plot = grafikas,
        width = 10,
        height = 6,
