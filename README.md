@@ -6,7 +6,7 @@
 ## Failų logika
 
 
-### 1) Duomenų paruošimas: scripts/Task_01.R
+### Duomenų paruošimas: scripts/Task_01.R
 scripts/Task_01.R yra **duomenų paruošimo skriptas**, paremtas dėstytojo pateiktu šablonu.
 Jo paskirtis vienodai paruošti duomenis visiems komandos nariams, kad analizės būtų daromos su tais pačiais objektais.
 
@@ -14,7 +14,7 @@ Jo paskirtis vienodai paruošti duomenis visiems komandos nariams, kad analizės
 - data/dat.rds – pagrindinė lentelė 
 - data/tm.rds – simptomų term-matrix 
 
-### 2) Pagrindinis analizės failas: scripts/Task0.R
+### Pagrindinis analizės failas: scripts/Task0.R
 scripts/Task0.R yra **pagrindinis (main) analizės failas**,
 Įkelia paruoštus objektus, sugeneruotus Task_01.R:
    ```r
