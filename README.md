@@ -16,7 +16,7 @@ Jo paskirtis vienodai paruošti duomenis visiems komandos nariams, kad analizės
 
 ### 2) Pagrindinis analizės failas: scripts/Task0.R
 scripts/Task0.R yra **pagrindinis (main) analizės failas**,
-1. Įkelia paruoštus objektus, sugeneruotus `Task_01.R`:
+Įkelia paruoštus objektus, sugeneruotus Task_01.R:
    ```r
    dat <- readRDS("data/dat.rds")
    tm  <- readRDS("data/tm.rds")
