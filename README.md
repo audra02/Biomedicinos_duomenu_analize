@@ -6,15 +6,15 @@
 ## Failų logika
 
 
-### 1) Duomenų paruošimas: `scripts/Task_01.R`
-`scripts/Task_01.R` yra **duomenų paruošimo skriptas**, paremtas dėstytojo pateiktu šablonu.
+### 1) Duomenų paruošimas: scripts/Task_01.R
+scripts/Task_01.R yra **duomenų paruošimo skriptas**, paremtas dėstytojo pateiktu šablonu.
 Jo paskirtis vienodai paruošti duomenis visiems komandos nariams, kad analizės būtų daromos su tais pačiais objektais.
 
-Šis skriptas sugeneruoja ir išsaugo paruoštus objektus į `data/`:
+Šis skriptas sugeneruoja ir išsaugo paruoštus objektus į data/:
 - data/dat.rds – pagrindinė lentelė 
 - data/tm.rds – simptomų term-matrix 
 
-### 2) Pagrindinis analizės failas: `scripts/Task0.R`
+### 2) Pagrindinis analizės failas: scripts/Task0.R
 scripts/Task0.R yra **pagrindinis (main) analizės failas**,
 1. Įkelia paruoštus objektus, sugeneruotus `Task_01.R`:
    ```r
@@ -27,7 +27,7 @@ scripts/01_symptomai18.R
 scripts/02_top_produktai.R
 scripts/03_pre_vs_school.R
 
-## Duomenys (data/) ir GitHub
+## Duomenys
 Šiuo metu **duomenys jau yra įkelti į GitHub **:
 - HFCS-Quarterly-20250930--CSV_PRODUCT-BASED.csv
 - dat.rds
