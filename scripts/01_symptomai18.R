@@ -3,7 +3,6 @@
 # 2 atrenkam nepilnamečius 
 idx <- dat$age < 18
 
-# pasidarom d18 anksti, kad viršuje esantys check'ai veiktų
 d18 <- dat[idx, , drop = FALSE]
 
 names(d18)
