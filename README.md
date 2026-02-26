@@ -1,44 +1,39 @@
 # Biomedicinos_duomenu_analize
 
-
 Šis repo yra darbas su FDA duomenimis.
 
 ## Failų logika
 
-## scripts/Task_01.R – duomenų paruošimas (dėstytojo šablonas)
-Task_01.R yra **duomenų paruošimo skriptas**, paremtas dėstytojo duotu kodu.  
-Jis skirtas tik tam, kad visi turėtų vienodai paruoštus objektus analizėms.
+### Duomenų paruošimas: scripts/Duomenu_paruosimas.R
 
-## Duomenys (data/) ir GitHub
-Šiuo metu **duomenys jau yra įkelti į GitHub (netyčia xd)**:
-- HFCS-Quarterly-20250930--CSV_PRODUCT-BASED.csv
-- dat.rds
-- tm.rds
+scripts/Duomenu_paruosimas.R yra **duomenų paruošimo skriptas**, paremtas dėstytojo pateiktu šablonu.
+Jo paskirtis – vienodai paruošti duomenis visiems komandos nariams, kad analizės būtų daromos su tais pačiais objektais.
 
+Šis skriptas sugeneruoja ir išsaugo paruoštus objektus į data/:
 
-**jei nereikės pačių duomenų repozitorijoje**, tada duomenis laikysime tik lokaliai tai įkelsimė duomenys į .gitignore, ar tiesiog pratrinsim. 
-```gitignore
-data/*.csv
-data/*.rds
+* data/dat.rds – pagrindinė lentelė
+* data/tm.rds – simptomų term-matrix
 
-Paleidus `Task_01.R` sugeneruojami lokaliai:
-- `data/dat.rds`
-- `data/tm.rds`
-## `Task0.R` (main analizės paleidėjas)
+### Pagrindinis analizės failas: scripts/Task0.R
 
-`scripts/Task0.R` yra **pagrindinis (main) analizės failas**, kuris,
- įkelia paruoštus objektus (sugeneruotus iš `Task_01.R`):
-```r
+scripts/Task0.R yra **pagrindinis (main) analizės failas**,
+įkelia paruoštus objektus, sugeneruotus Duomenu_paruosimas.R:
+
 dat <- readRDS("data/dat.rds")
 tm  <- readRDS("data/tm.rds")
 
-paleidžia kiekvieno komandos nario analizės dalį per source(...).
-Idėja tokia: kiekvienas  rašo savo atskirą skriptą
-scripts/01_symptomai18.R
-scripts/02_top_produktai.R
-scripts/03_pre_vs_school.R
-O Task0.R juos sujungia
+Kiekvienas komandos narys rašė savo atskirą analizės skriptą, o Duomenu_paruosimas.R juos sujungė į vieną bendrą darbą.
 
-RStudio Console:
-```r
-source("scripts/Task_01.R")
+Naudojami analizės skriptai:
+
+* scripts/01_symptomai18.R
+* scripts/02_top_produktai.R
+* scripts/03_pre_vs_post_school.R
+
+## Duomenys
+
+Šiuo metu **duomenys jau yra įkelti į GitHub**:
+
+* HFCS-Quarterly-20250930--CSV_PRODUCT-BASED.csv
+* dat.rds
+* tm.rds
