@@ -19,6 +19,7 @@
 dat <- readRDS("data/dat.rds")
 tm  <- readRDS("data/tm.rds")
 
+
 # 2) Jei dat ir tm nesutampa eilučių skaičius, stabdom darbą
 #    (tai reiškia, kad suporavimas tarp lentelių sugadintas)
 stopifnot(nrow(dat) == nrow(tm))
@@ -32,4 +33,4 @@ source("scripts/01_symptomai18.R")
 source("scripts/02_top_produktai.R")
 
 # 3. Kaip skiriasi nusiskundimai tarp iki mokylinio ir po mokyklinio amžiaus vaikų?
-# source("scripts/03_pre_vs_post_school.R")   # įjungti, kai bus paruoštas
+source("scripts/03_pre_vs_post_school.R")
