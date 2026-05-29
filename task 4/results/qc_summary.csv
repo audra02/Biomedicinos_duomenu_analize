@@ -1,0 +1,8 @@
+"cohort","samples_before","samples_after_qc","samples_removed_qc","samples_after_age_filter","samples_removed_age_filter","cpgs_common","output_file"
+"fraga",64,60,4,60,0,369543,"../results/cleaned_cohorts/fraga_cleaned.rds"
+"johansson",732,679,53,676,3,369543,"../results/cleaned_cohorts/johansson_cleaned.rds"
+"kalyakulina",245,179,66,179,0,369543,"../results/cleaned_cohorts/kalyakulina_cleaned.rds"
+"kurushima",480,454,26,454,0,369543,"../results/cleaned_cohorts/kurushima_cleaned.rds"
+"mahdi",500,477,23,473,4,369543,"../results/cleaned_cohorts/mahdi_cleaned.rds"
+"quinn",164,157,7,157,0,369543,"../results/cleaned_cohorts/quinn_cleaned.rds"
+"xu",256,236,20,236,0,369543,"../results/cleaned_cohorts/xu_cleaned.rds"
