@@ -18,23 +18,10 @@ Pirmiausia duomenys paruošiami bendru duomenų paruošimo skriptu, kad visi ana
 
 Svarbi užduoties sąlyga – negalima naudoti jau egzistuojančių epigenetinių laikrodžių. Todėl kiekvienas modelis kuriamas savarankiškai, naudojant regresijos ar mašininio mokymosi metodus.
 
-Šiuo metu `task4` dalyje yra Justino sprendimas. Vėliau bus pridėti ir kiti komandos narių sprendimai:
+`task4` dalyje yra epigenetinių laikrodžių kūrimo skriptai:
 
 - `Justinas.R`
 - `Audra.R`
 - `Daniel.R`
 
 Galutiniame palyginime bus vertinama, kuris iš sukurtų epigenetinių laikrodžių geriausiai prognozuoja amžių. Modeliai bus lyginami pagal prognozavimo paklaidą ir kitus tikslumo įverčius.
-
-## Repozitorijos struktūra
-
-```text
-task0/
-  data/
-  scripts/
-  results/
-
-task4/
-  data/
-  scripts/
-  results/
