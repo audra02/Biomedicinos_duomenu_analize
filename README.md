@@ -16,15 +16,20 @@ Pirmiausia duomenys paruošiami bendru duomenų paruošimo skriptu, kad visi ana
 
 Prieš modeliavimą atliekamas duomenų paruošimas: pritaikoma mėginių kokybės kontrolė, paliekami tik visiems duomenų rinkiniams bendri CpG, pašalinami mėginiai be amžiaus informacijos ir paruošiama amžiaus transformacija modeliavimui.
 
-Toliau atrenkami su amžiumi labiausiai susiję CpG požymiai. Pagal šiuos požymius kuriami ir vertinami skirtingi amžiaus prognozavimo modeliai.
+Prieš paleidžiant epigenetinių laikrodžių skriptus, reikia paleisti du paruošiamuosius skriptus iš `task4/scripts/` aplanko:
 
-Modeliai kuriami naudojant regresijos ar mašininio mokymosi metodus.
+1. `prepare_data.R`
 
+   Šis skriptas paruošia pradinius metilinimo duomenis modeliavimui. Jis pritaiko kokybės kontrolės filtrus, palieka tik visiems duomenų rinkiniams bendrus CpG, pašalina mėginius be amžiaus informacijos ir išsaugo išvalytas kohortas.
 
-`task4` dalyje yra epigenetinių laikrodžių kūrimo skriptai:
+2. `02_select_age_related_cpgs.R`
+
+   Šis skriptas naudoja išvalytas kohortas ir atrenka CpG, kurie labiausiai susiję su amžiumi. Šie požymiai vėliau naudojami epigenetinių laikrodžių modeliams kurti.
+
+Tik atlikus šiuos paruošimo žingsnius galima paleisti atskirus epigenetinių laikrodžių kūrimo skriptus:
 
 - `Justinas.R`
 - `Audra.R`
 - `Daniel.R`
 
-Galutiniame palyginime bus vertinama, kuris iš sukurtų epigenetinių laikrodžių geriausiai prognozuoja amžių. Modeliai bus lyginami pagal prognozavimo paklaidą ir kitus tikslumo įverčius.
+Modeliai kuriami naudojant regresijos ar mašininio mokymosi metodus.
