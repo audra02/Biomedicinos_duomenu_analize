@@ -14,9 +14,12 @@ Pirmiausia duomenys paruošiami bendru duomenų paruošimo skriptu, kad visi ana
 
 `task4` dalyje kuriamas epigenetinis laikrodis, t. y. modelis, kuris pagal pilno kraujo DNR metilinimo duomenis prognozuoja individo chronologinį amžių.
 
-Šioje užduotyje naudojami keli DNR metilinimo duomenų rinkiniai. Prieš modeliavimą atliekamas duomenų paruošimas, kokybės kontrolė, pasirenkami bendri CpG visiems rinkiniams ir paruošiami duomenys amžiaus prognozavimo modeliams.
+Prieš modeliavimą atliekamas duomenų paruošimas: pritaikoma mėginių kokybės kontrolė, paliekami tik visiems duomenų rinkiniams bendri CpG, pašalinami mėginiai be amžiaus informacijos ir paruošiama amžiaus transformacija modeliavimui.
 
-Svarbi užduoties sąlyga – negalima naudoti jau egzistuojančių epigenetinių laikrodžių. Todėl kiekvienas modelis kuriamas savarankiškai, naudojant regresijos ar mašininio mokymosi metodus.
+Toliau atrenkami su amžiumi labiausiai susiję CpG požymiai. Pagal šiuos požymius kuriami ir vertinami skirtingi amžiaus prognozavimo modeliai.
+
+Modeliai kuriami naudojant regresijos ar mašininio mokymosi metodus.
+
 
 `task4` dalyje yra epigenetinių laikrodžių kūrimo skriptai:
 
