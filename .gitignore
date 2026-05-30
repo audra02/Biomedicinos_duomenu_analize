@@ -4,4 +4,8 @@
 .Ruserdata
 .DS_Store
 .rds
-data/rhead.rds
+task 4/data/*.rds
+task 4/results/*.rds
+task 4/model_comparison/*.rds
+task 4/cleaned_cohorts/*.rds
+task 4/age_cpg_selection/*.rds
