@@ -1,35 +1,140 @@
-# Biomedicinos_duomenu_analize
+# Biomedicinos duomenų analizė
 
-Šioje repozitorijoje pateikiamos dvi atskiros ir tarpusavyje nesusijusios užduotys: `task0` ir `task4`.
+Šioje repozitorijoje pateikiamos dvi atskiros užduotys:
 
-## task0
+* **task0** – FDA duomenų analizė.
+* **task4** – epigenetinio laikrodžio kūrimas naudojant DNR metilinimo duomenis.
 
-`task0` dalyje atliekama FDA duomenų analizė.
+---
 
-Pirmiausia duomenys paruošiami bendru duomenų paruošimo skriptu, kad visi analizės žingsniai naudotų tuos pačius objektus. Po to pagrindinis analizės failas įkelia paruoštus duomenis ir paleidžia atskirus analizės skriptus.
+# Task 0
 
-Šioje dalyje nagrinėjami simptomai, produktai ir skirtumai tarp pasirinktų laikotarpių. Rezultatai naudojami aprašomajai analizei, grafikams ir išvadoms parengti.
+Šioje užduotyje atliekama FDA nepageidaujamų reiškinių duomenų analizė.
 
-## task4
+Duomenys pirmiausia paruošiami bendru duomenų paruošimo skriptu, kad visi analizės žingsniai naudotų vienodus duomenų objektus. Toliau vykdoma simptomų, produktų ir skirtingų laikotarpių analizė.
 
-`task4` dalyje kuriamas epigenetinis laikrodis, t. y. modelis, kuris pagal pilno kraujo DNR metilinimo duomenis prognozuoja individo chronologinį amžių.
+Rezultatai naudojami:
 
-Prieš modeliavimą atliekamas duomenų paruošimas: pritaikoma mėginių kokybės kontrolė, paliekami tik visiems duomenų rinkiniams bendri CpG, pašalinami mėginiai be amžiaus informacijos ir paruošiama amžiaus transformacija modeliavimui.
+* aprašomajai statistinei analizei;
+* grafikų sudarymui;
+* rezultatų interpretacijai;
+* išvadų formulavimui.
 
-Prieš paleidžiant epigenetinių laikrodžių skriptus, reikia paleisti du paruošiamuosius skriptus iš `task4/scripts/` aplanko:
+---
 
-1. `prepare_data.R`
+# Task 4
 
-   Šis skriptas paruošia pradinius metilinimo duomenis modeliavimui. Jis pritaiko kokybės kontrolės filtrus, palieka tik visiems duomenų rinkiniams bendrus CpG, pašalina mėginius be amžiaus informacijos ir išsaugo išvalytas kohortas.
+Šioje užduotyje kuriamas epigenetinis laikrodis – modelis, prognozuojantis individo chronologinį amžių pagal pilno kraujo DNR metilinimo duomenis.
 
-2. `02_select_age_related_cpgs.R`
+Analizei buvo naudojamos septynios nepriklausomos kohortos:
 
-   Šis skriptas naudoja išvalytas kohortas ir atrenka CpG, kurie labiausiai susiję su amžiumi. Šie požymiai vėliau naudojami epigenetinių laikrodžių modeliams kurti.
+* Fraga
+* Johansson
+* Kalyakulina
+* Kurushima
+* Mahdi
+* Quinn
+* Xu
 
-Tik atlikus šiuos paruošimo žingsnius galima paleisti atskirus epigenetinių laikrodžių kūrimo skriptus:
+Po kokybės kontrolės galutiniame duomenų rinkinyje liko:
 
-- `Justinas.R`
-- `Audra.R`
-- `Daniel.R`
+* 2235 mėginiai;
+* 369543 bendri CpG lokusai.
 
-Modeliai kuriami naudojant regresijos ar mašininio mokymosi metodus.
+---
+
+# Duomenų paruošimas
+
+Prieš kuriant modelius būtina paleisti du paruošiamuosius skriptus:
+
+```r
+source("prepare_data.R")
+source("02_select_age_related_cpgs.R")
+```
+
+## prepare_data.R
+
+Šis skriptas:
+
+* atlieka mėginių kokybės kontrolę;
+* pašalina nekokybiškus mėginius;
+* palieka tik visoms kohortoms bendrus CpG;
+* pašalina mėginius be amžiaus informacijos;
+* sukuria išvalytų kohortų failus tolimesnei analizei.
+
+## 02_select_age_related_cpgs.R
+
+Šis skriptas:
+
+* apskaičiuoja koreliacijas tarp CpG ir amžiaus;
+* atrenka su amžiumi labiausiai susijusius CpG;
+* sudaro CpG reitingus tolimesniam modeliavimui.
+
+Tik atlikus šiuos žingsnius galima kurti epigenetinius laikrodžius.
+
+---
+
+# Epigenetinių laikrodžių modeliai
+
+Po duomenų paruošimo paleidžiami modelių kūrimo skriptai:
+
+```r
+source("Justinas.R")
+source("Audra.R")
+```
+
+Buvo išbandyti keli regresijos ir mašininio mokymosi metodai:
+
+* PCA + Linear Regression
+* PCA + kNN Regression
+* Random Forest
+* M-value Ridge Regression
+* Signature Kernel
+
+Modeliai buvo vertinami naudojant:
+
+* MAE (Mean Absolute Error);
+* RMSE (Root Mean Squared Error);
+* Pearson koreliaciją.
+
+Vertinimui naudotas 80 % mokymo ir 20 % testinis duomenų padalinimas kiekvienoje kohortoje.
+
+---
+
+# Rezultatai
+
+Geriausią rezultatą pasiekė modelis:
+
+**m_value_ridge_calibrated**
+
+Modelio rezultatai testinėje aibėje:
+
+| Metrika     | Reikšmė |
+| ----------- | ------: |
+| MAE         |   2.603 |
+| RMSE        |   3.869 |
+| Koreliacija |   0.986 |
+
+Tai reiškia, kad modelis vidutiniškai klysta maždaug 2,6 metų prognozuodamas individo amžių pagal DNR metilinimo duomenis.
+
+Papildomai nustatyta, kad Quinn kohortoje (0–3 metų amžiaus tiriamieji) modeliai pasiekė itin aukštą tikslumą. M-value Ridge modelio vidutinė absoliuti paklaida šioje kohortoje siekė vos 0,155 metų.
+
+---
+
+# Projekto struktūra
+
+```text
+task4/
+├── data/
+├── scripts/
+│   ├── prepare_data.R
+│   ├── 02_select_age_related_cpgs.R
+│   ├── Justinas.R
+│   └── Audra.R
+├── results/
+│   ├── cleaned_cohorts/
+│   ├── age_cpg_selection/
+│   └── model_comparison/
+```
+
+Visi modelių rezultatai, grafikai ir tarpinių analizės žingsnių failai išsaugomi `results/` kataloge.
